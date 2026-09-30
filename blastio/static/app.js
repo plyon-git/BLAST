@@ -341,7 +341,7 @@ const readinessFields = [
  ['advanced_optout_reviewed', 'Advanced Opt-Out and webhook behavior reviewed in Twilio Console'],
  ['sender_associations_reviewed', 'Messaging Service, registered campaign, and authorized sender associations reviewed'],
  ['campaign_content_reviewed', 'Consent collection, purpose, disclosures, and message content reviewed against registration'],
- ['smoke_test_reviewed', 'Controlled smoke test with explicitly authorized recipients completed and reviewed']
+ ['smoke_test_reviewed', 'Authorized smoke-test plan reviewed; results recorded after the controlled check']
 ];
 async function settingsView() {
  const s = await api('/api/settings'); state.settings = s; if (state.view !== 'settings') return;

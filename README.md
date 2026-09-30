@@ -8,6 +8,8 @@ This is proprietary 101XVC software. See [LICENSE](LICENSE).
 
 ## Start locally
 
+For copy-and-paste Windows setup and the complete operator walkthrough, read [START_HERE.md](START_HERE.md).
+
 Requires Python 3.11 or newer and a modern browser. From the repository root:
 
 ```bash
