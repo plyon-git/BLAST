@@ -2,7 +2,7 @@
 
 Verified on 2026-09-30 with Python 3.12.14. The environment defaults to simulation.
 
-- Automated Python suite: 135 passed. Includes real SQLite and authenticated HTTP tests, simulated provider attempts, and HTTP transport mocks.
+- Automated Python suite: 137 passed. Includes real SQLite and authenticated HTTP tests, simulated provider attempts, HTTP transport mocks, and deterministic quoted-JSON CSV parsing with CRLF and LF line endings.
 - JavaScript syntax: `node --check blastio/static/app.js` passed.
 - Python compilation and installed dependency consistency checks passed.
 - Browser verification uses an isolated synthetic database. See the browser smoke results recorded below.

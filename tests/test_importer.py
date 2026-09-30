@@ -202,6 +202,23 @@ def test_existing_profile_fields_and_reply_hold_are_preserved(conn):
     assert json.loads(contact["custom_fields"]) == {"tier": "reviewed", "extra": "new"}
 
 
+@pytest.mark.parametrize("newline", ["\r\n", "\n"])
+def test_rfc_quoted_json_does_not_depend_on_sniffer_quote_heuristics(conn, monkeypatch, newline):
+    class MisdetectedDialect(csv.excel):
+        doublequote = False
+
+    monkeypatch.setattr(csv.Sniffer, "sniff", lambda self, sample, delimiters=None: MisdetectedDialect)
+    content = csv_file(["phone", "first_name", "custom_fields"], [["+12025550101", "Reviewed", '{"tier":"reviewed"}']])
+    content = content.replace(b"\r\n", newline.encode())
+    preview = preview_csv(content, "quoted-json.csv", None)
+    assert preview["accepted"] == 1
+    assert preview["rejected"] == 0
+    assert preview["rows"][0]["custom_fields"] == {"tier": "reviewed"}
+    commit_import(conn, preview, "operator")
+    saved = conn.execute("SELECT custom_fields FROM contacts").fetchone()[0]
+    assert json.loads(saved) == {"tier": "reviewed"}
+
+
 def test_property_ownership_collision_requires_review(conn):
     content = b"phone,street_address,city,state\n+12025550101,10 Oak St,Denver,CO\n+12025550102,10 Oak St,Denver,CO\n"
     result = commit_import(conn, preview_csv(content, "collision.csv", None), "operator")

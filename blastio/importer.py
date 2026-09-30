@@ -258,7 +258,7 @@ def preview_csv(content: bytes, filename: str, region: str | None, mapping: dict
     if "\x00" in text:
         raise ValueError("CSV contains NUL characters or unsupported encoding")
     try:
-        dialect = csv.Sniffer().sniff(text[:65_536], delimiters=",;\t|")
+        delimiter = csv.Sniffer().sniff(text[:65_536], delimiters=",;\t|").delimiter
     except csv.Error:
         # Ragged records can defeat Sniffer. Recover the delimiter from the
         # correctly parsed header so the operator can see a rejected-row report.
@@ -270,8 +270,12 @@ def preview_csv(content: bytes, filename: str, region: str | None, mapping: dict
             except (csv.Error, StopIteration):
                 pass
         delimiter = max(candidates, key=lambda pair: pair[0])[1] if candidates else ","
-        dialect = type("HeaderDialect", (csv.excel,), {"delimiter": delimiter})
-    reader = csv.reader(io.StringIO(text, newline=""), dialect=dialect, strict=True)
+    # Infer only the separator. Sniffer's quote/doublequote heuristics differ
+    # between Python patch releases and can misread RFC CSV containing quoted
+    # JSON. CSV exports from Excel/Python escape a quote by doubling it; keep
+    # that contract deterministic across Windows and Linux.
+    reader = csv.reader(io.StringIO(text, newline=""), delimiter=delimiter,
+                        quotechar='"', doublequote=True, escapechar=None, strict=True)
     try:
         raw_headers = next(reader)
     except (StopIteration, csv.Error) as exc:
