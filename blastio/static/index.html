@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101b2e">
+<title>101XVC Blastio</title>
+<link rel="stylesheet" href="/static/style.css">
+<script defer src="/static/app.js"></script>
+</head>
+<body>
+<div id="login" class="login-layout" hidden>
+  <div class="login-intro">
+    <a class="brand brand-light" href="/"><span class="brand-mark">101</span><span>BLASTIO<small>BY 101XVC</small></span></a>
+    <div class="login-copy"><span class="eyebrow">RELATIONSHIPS, RESPONSIBLY.</span><h1>A clearer way<br>to reach people.</h1><p>Your contacts, conversations, and approved campaigns. One workspace built to keep you in control.</p><div class="login-note"><span class="status-dot"></span> Simulation first. Every send reviewed.</div></div>
+    <div class="login-footer">101XVC proprietary technology</div>
+  </div>
+  <div class="login-panel"><form id="login-form" class="login-form"><span class="eyebrow">OPERATOR WORKSPACE</span><h2>Welcome back.</h2><p class="muted">Sign in to manage your outreach.</p><label>Email<input name="email" type="email" autocomplete="username" required placeholder="you@company.com"></label><label>Password<input name="password" type="password" autocomplete="current-password" required></label><p id="login-error" class="form-error" role="alert"></p><button class="button primary" type="submit">Sign in <span aria-hidden="true">→</span></button><div class="login-help">Use the administrator account created during setup.</div></form></div>
+</div>
+<div id="app" class="app-shell" hidden>
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="#dashboard"><span class="brand-mark">101</span><span>BLASTIO<small>BY 101XVC</small></span></a>
+    <div class="workspace-tag"><span class="status-dot"></span><span id="workspace-name">Outreach workspace</span></div>
+    <nav id="navigation" aria-label="Main navigation"></nav>
+    <div class="sidebar-bottom"><div class="sidebar-mode"><span class="tiny-label">ENVIRONMENT</span><strong id="sidebar-environment">Simulation</strong><p>Reviewed evidence. Deliberate sending.</p></div><button class="user-button" id="user-button"><span class="avatar" id="user-avatar">PL</span><span><strong id="user-email">Operator</strong><small id="user-role">Administrator</small></span><span aria-hidden="true">↗</span></button></div>
+  </aside>
+  <div class="main-shell"><header class="topbar"><div class="topbar-left"><button class="icon-button mobile-menu" id="mobile-menu" aria-label="Toggle navigation">☰</button><span class="topbar-workspace">101XVC</span><span class="crumb-separator">/</span><span id="topbar-title">Overview</span></div><div class="topbar-right"><span class="environment-pill" id="environment-pill">SIMULATION</span><button class="button small danger-outline" id="global-pause">Pause all sending</button></div></header><main id="main" tabindex="-1"></main><footer class="app-footer"><span>101XVC Blastio</span><span>Every message has a reason. Every decision has a record.</span></footer></div>
+</div>
+<div id="modal-root"></div><div id="toast-root" role="status" aria-live="polite"></div>
+</body>
+</html>

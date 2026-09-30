@@ -1,0 +1,8 @@
+{
+  "name": "101xvc-blastio-browser-checks",
+  "version": "1.0.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {"test:ui": "node scripts/browser-smoke.cjs"},
+  "devDependencies": {"playwright": "1.58.0"}
+}

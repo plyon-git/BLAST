@@ -1,0 +1,22 @@
+[Unit]
+Description=101XVC Blastio API
+After=network.target
+
+[Service]
+Type=simple
+User=blastio
+Group=blastio
+WorkingDirectory=/opt/blastio
+EnvironmentFile=/etc/blastio/blastio.env
+ExecStart=/opt/blastio/.venv/bin/uvicorn blastio.app:app --host 127.0.0.1 --port 8000 --workers 1
+Restart=on-failure
+RestartSec=5
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/blastio
+
+[Install]
+WantedBy=multi-user.target

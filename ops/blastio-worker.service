@@ -1,0 +1,23 @@
+[Unit]
+Description=101XVC Blastio durable worker
+After=network.target blastio-api.service
+Requires=blastio-api.service
+
+[Service]
+Type=simple
+User=blastio
+Group=blastio
+WorkingDirectory=/opt/blastio
+EnvironmentFile=/etc/blastio/blastio.env
+ExecStart=/opt/blastio/.venv/bin/python -m blastio.worker
+Restart=on-failure
+RestartSec=5
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/blastio
+
+[Install]
+WantedBy=multi-user.target

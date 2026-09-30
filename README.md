@@ -4,6 +4,8 @@ Consent-based SMS outreach, seller conversations, and delivery operations using 
 
 This is proprietary 101XVC software. See [LICENSE](LICENSE).
 
+![Blastio operator dashboard](docs/preview.png)
+
 ## Start locally
 
 Requires Python 3.11 or newer and a modern browser. From the repository root:
